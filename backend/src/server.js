@@ -2,11 +2,10 @@ import express from 'express'
 import dotenv from 'dotenv'
 dotenv.config()
 import { createServer } from 'node:http'
-import { Server } from 'socket.io'
-import mongoose from 'mongoose'
 import cors from 'cors'
 import connectDb from './config/db.js'
 import { connectToSocket } from './controllers/socketManager.js'
+import userRouter from './routes/user.routes.js'
 
 const app = express()
 
@@ -22,7 +21,8 @@ app.use(express.urlencoded({ limit: '40kb', extended: true }))
 app.get('/', (req, res) => {
   return res.send('server is live')
 })
-
+// routes
+app.use('/api/v1/users', userRouter)
 const start = async () => {
   try {
     await connectDb()

@@ -18,7 +18,7 @@ const userSchema = new Schema({
   token: {
     type: String,
   },
-})
+},{timestamps:true})
 
 const User = mongoose.model('user', userSchema)
 export { User }
